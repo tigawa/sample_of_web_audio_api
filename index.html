@@ -1,8 +1,44 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript">
+    var context;
+    var dogBarkingBuffer = null;
+    
+    
+    window.addEventListener('load', init, false);
+    function init() {
+      try {
+        context = new webkitAudioContext();
+      
+        var btnPlay = document.getElementById("play");
+        btnPlay.addEventListener("click",
+                                 function(){loadDogSound("se_maoudamashii_se_pc02.mp3")}, false);
+
+      } catch(e) {
+        alert('Web Audio API is not supported in this browser');
+      }
+    }
+    
+   function loadDogSound(url) {
+      alert(url);
+    
+      var request = new XMLHttpRequest();
+      request.open('GET', url, true);
+      request.responseType = 'arraybuffer';
+
+      // Decode asynchronously
+      request.onload = function() {
+        context.decodeAudioData(request.response, function(buffer) {
+          dogBarkingBuffer = buffer;
+        }, onError);
+      }
+      request.send();
+    }
+    
+</script>
 </head>
 <body>
-<button >再生</button>
+<button id="play" >▶</button>
 </body>
 </html>
