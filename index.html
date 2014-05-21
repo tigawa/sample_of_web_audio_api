@@ -4,27 +4,27 @@
 <script type="text/javascript">
     var context;
     var enterSoundBuffer = null;
-    var anykeySoundBuffer = null;
+    var anykeySoundBuffer = {};
     
     window.addEventListener('load', init, false);
     function init() {
       try {
         context = new webkitAudioContext();
-        loadDogSound("se_maoudamashii_se_pc03.mp3");
+        loadDogSound('key', "se_maoudamashii_se_pc03.mp3");
 
         /* ボタンのクリック処理 */
 //        var btnPlay = document.getElementById("play");
 //        btnPlay.addEventListener("click", function(){playSound(anykeySoundBuffer);} , false);
           
         /* keybrodを押した時の処理 */
-        document.addEventListener("keydown", function(){playSound(anykeySoundBuffer);} , false);
+        document.addEventListener("keydown", function(){playSound(anykeySoundBuffer.key);} , false);
 
       } catch(e) {
         alert('Web Audio API is not supported in this browser');
       }
     }
     
-   function loadDogSound(url) {
+   function loadDogSound(key, url) {
       var request = new XMLHttpRequest();
       request.open('GET', url, true);
       request.responseType = 'arraybuffer';
@@ -33,7 +33,7 @@
       request.onload = function() {
         context.decodeAudioData(request.response, 
                                 /* デコードが完了したときに実行される処理 */
-                                function(buffer) { anykeySoundBuffer = buffer;},
+                                function(buffer) { anykeySoundBuffer[key] = buffer;},
                                 /* でコードが失敗したときに実行される処理 */
                                 function(){alert("error")});
         }
