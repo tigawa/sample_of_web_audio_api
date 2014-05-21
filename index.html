@@ -9,6 +9,7 @@
     function init() {
         try {
             context = new webkitAudioContext();
+            /* key_down */
             loadDogSound('key_down', "audio/key_down.mp3");
             loadDogSound('enter', "audio/enter.mp3");
             loadDogSound('back_space', "audio/back_space.mp3");
@@ -23,8 +24,10 @@
             loadDogSound('7', "audio/ppush7.mp3");
             loadDogSound('8', "audio/ppush8.mp3");
             loadDogSound('9', "audio/ppush9.mp3");
-            
-            
+            /* mouse */
+            loadDogSound('mouse_click', "audio/mouse_click.mp3");
+            loadDogSound('mouse_dblclick', "audio/mouse_dblclick.mp3");
+            loadDogSound('button_click', "audio/button_click.wav");
             
             /* keybrodを押した時の処理 */
             document.addEventListener("keydown", 
@@ -37,11 +40,18 @@
                         playSound(soundBuffer.tab);
                     else if ( ev.keyCode >= 48 && ev.keyCode <=57 )
                         playSound(soundBuffer[(ev.keyCode-48)]);
-                        
                     else
                         playSound(soundBuffer.key_down);
                 }, false);
-                        
+
+            /* マウス操作の処理 */
+            document.addEventListener("mousedown",
+                function(ev){
+                    if(ev.target.getElementsByTagName = "BUTION")
+                        playSound(soundBuffer.mouse_click);
+                    else
+                        playSound(soundBuffer.button_click);
+                }, false);
 
         } catch(e) {
             alert('Web Audio API is not supported in this browser');
@@ -73,9 +83,26 @@
 </script>
 </head>
 <body>
-<textarea style="width:500; height:500" placeholder="ここにタイプしてください。"></textarea>
-<!--]
-
-<div><button id="play" >再生</button></div>-->
-</body>
+    <form>
+        <table>
+            <tr><td>
+                <textarea style="width:500; height:100" placeholder="ここにタイプしてください。"></textarea></td></tr>
+            <tr><td>
+                <input type="button" value="button1"> <button>button2</button>     
+            </td></tr>
+            <tr><td>
+                A.<input type="checkbox" name="chx"> B.<input type="checkbox" name="chx">    
+            </td></tr>
+            <tr><td>
+                A.<input type="radio" name="rdo"> B.<input type="radio" name="rdo">    
+            </td></tr>
+            <tr><td>
+                <input type="text" width="100">    
+            </td></tr>
+            <tr><td>
+                <input type="submit" width="submit">    
+            </td></tr>
+            </tr>
+        </table>
+    </form>
 </html>
