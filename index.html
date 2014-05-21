@@ -11,12 +11,33 @@
             context = new webkitAudioContext();
             loadDogSound('key_down', "audio/key_down.mp3");
             loadDogSound('enter', "audio/enter.mp3");
-          
+            loadDogSound('back_space', "audio/back_space.mp3");
+            loadDogSound('tab', "audio/tab.mp3");
+            loadDogSound('0', "audio/ppush0.mp3");
+            loadDogSound('1', "audio/ppush1.mp3");
+            loadDogSound('2', "audio/ppush2.mp3");
+            loadDogSound('3', "audio/ppush3.mp3");
+            loadDogSound('4', "audio/ppush4.mp3");
+            loadDogSound('5', "audio/ppush5.mp3");
+            loadDogSound('6', "audio/ppush6.mp3");
+            loadDogSound('7', "audio/ppush7.mp3");
+            loadDogSound('8', "audio/ppush8.mp3");
+            loadDogSound('9', "audio/ppush9.mp3");
+            
+            
+            
             /* keybrodを押した時の処理 */
             document.addEventListener("keydown", 
                 function(ev){
                     if ( ev.keyCode == 13 )
                         playSound(soundBuffer.enter);
+                    else if ( ev.keyCode == 8 || ev.keyCode == 46 )
+                        playSound(soundBuffer.back_space);
+                    else if ( ev.keyCode == 9 )
+                        playSound(soundBuffer.tab);
+                    else if ( ev.keyCode >= 48 && ev.keyCode <=57 )
+                        playSound(soundBuffer[(ev.keyCode-48)]);
+                        
                     else
                         playSound(soundBuffer.key_down);
                 }, false);
