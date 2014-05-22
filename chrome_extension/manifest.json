@@ -1,0 +1,39 @@
+{
+    "name": "Typewriter SE!",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "キーボードを押すとタイプライターをタッチしたときの音がなります。それ以外の音も混じってます",
+    "permissions": [
+        "tabs", "<all_urls>"
+    ],
+    "icons": {
+        "128": "images/typewriter.png"
+    },
+    
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["typing.js"]
+      }
+    ],
+    
+    "web_accessible_resources": [
+        "audio/key_down.mp3",
+        "audio/enter.mp3",
+        "audio/back_space.mp3",
+        "audio/tab.mp3",
+        "audio/ppush0.mp3",
+        "audio/ppush1.mp3",
+        "audio/ppush2.mp3",
+        "audio/ppush3.mp3",
+        "audio/ppush4.mp3",
+        "audio/ppush5.mp3",
+        "audio/ppush6.mp3",
+        "audio/ppush7.mp3",
+        "audio/ppush8.mp3",
+        "audio/ppush9.mp3",
+        "audio/mouse_click.mp3",
+        "audio/mouse_dblclick.mp3",
+        "audio/button_click.wav"
+	]
+}
